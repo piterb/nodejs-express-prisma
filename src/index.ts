@@ -1,5 +1,9 @@
 import express from "express";
 
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
 const app = express();
 
 app.use(express.json());
@@ -7,6 +11,12 @@ app.use(express.json());
 // feel free to install any other ORM for this exercise
 
 // get all movies
+app.get('/movies', async (request, response) => {
+
+  const movie = await prisma.movie.findMany()
+
+  response.json(movie)
+});
 
 // post a movie
 
